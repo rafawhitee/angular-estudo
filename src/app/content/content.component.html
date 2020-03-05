@@ -1,0 +1,59 @@
+
+<div class="card cardWidth marginTop-5-p marginLeft-20">
+
+    <div class="card-header">
+        Pessoas
+    </div>
+    <div class="card-body">
+
+        <mat-form-field>
+            <mat-label>Filtrar</mat-label>
+            <input matInput (keyup)="aplicarFiltro($event)" placeholder="Digite algo para filtrar...">
+        </mat-form-field>
+
+        <mat-table class="pessoas-table mat-elevation-z8" [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="id">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
+                <mat-cell *matCellDef="let user">{{user.id}}</mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="nome" style="headerMat">
+                <mat-header-cell  *matHeaderCellDef mat-sort-header>Nome</mat-header-cell>
+                <mat-cell *matCellDef="let user">{{user.nome}}</mat-cell>
+        
+            </ng-container>
+        
+            <ng-container matColumnDef="login">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Login</mat-header-cell>
+                <mat-cell *matCellDef="let user">{{user.login}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="altura">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Altura</mat-header-cell>
+                <mat-cell *matCellDef="let user">{{user.altura}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="peso">
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Peso</mat-header-cell>
+                <mat-cell *matCellDef="let user">{{user.peso}}</mat-cell>
+            </ng-container>
+
+                
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        
+            <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+        
+        </mat-table>
+
+        <mat-paginator [pageSizeOptions]="[1, 10, 50]" showFirstLastButtons></mat-paginator>
+
+</div>
+
+    <div class="card-footer">
+       <button class="btn btn-warning" (click)="buscarPessoas()">Buscar Pessoas</button>
+       <button class="btn btn-info marginLeft-1-p" (click)="abrirPopupNovaPessoa()">Nova Pessoa</button>
+       <button class="btn btn-success marginLeft-1-p" (click)="buscarPessoas()">Selecionada</button>
+    </div>
+
+</div>

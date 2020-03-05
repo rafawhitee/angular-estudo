@@ -1,0 +1,25 @@
+<form class="example-form" (ngSubmit)="atualizarOuInserir()" [formGroup]="formCadastroOrInserir">
+
+    <h5> Nome </h5>
+    <input type="text" class="form-control" id="inputNome" placeholder="Seu nome..." formControlName="nome">
+    <br>
+
+    <h5> Login </h5>
+    <input type="text" class="form-control" id="inputLogin" placeholder="Seu login..." formControlName="login">
+    <br>
+
+    <h5> Senha </h5>
+    <input type="text" class="form-control" id="inputSenha" placeholder="Seu login..." formControlName="senha">
+    <br>
+
+    <h5> Altura </h5>
+    <input type="number" class="form-control" id="inputAltura" placeholder="Sua altura..." formControlName="altura">
+    <br>
+
+    <h5> Peso </h5>
+    <input type="number" class="form-control" id="inputPeso" placeholder="Seu peso..." formControlName="peso">
+    <br>
+
+    <button type="submit" class="btn btn-success"> Cadastrar </button>
+
+  </form>
