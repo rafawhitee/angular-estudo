@@ -11,7 +11,7 @@ import { ContentComponent, FormPessoaDialog } from './content/content.component'
 import { FooterComponent } from './footer/footer.component';
 import { HttpClientModule } from '@angular/common/http';
 import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule, 
-  MatSortModule, MatTableModule } from "@angular/material";
+  MatSortModule, MatTableModule, MatCheckboxModule } from "@angular/material";
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -36,6 +36,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatProgressSpinnerModule,
     MatSortModule,
     MatTableModule,
+    MatCheckboxModule,
     ReactiveFormsModule
   ],
   providers: [],

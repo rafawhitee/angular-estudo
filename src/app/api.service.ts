@@ -24,8 +24,16 @@ export class ApiService {
         'Content-Type':  'application/json',
       })
     };
-    console.log('bateu aqui')
     return this.http.post(localUrl+"/pessoas", pessoa, httpOptions)
+  }
+
+  deletarPessoa(id: any){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json',
+      })
+    };
+    return this.http.delete(localUrl+"/pessoas", id)
   }
  
 }

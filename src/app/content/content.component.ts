@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, Input, ViewChild } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatTableDataSource, MatPaginator, MatSort} from '@angular/material';
 import { ApiService } from '../api.service';
 import { FormBuilder } from '@angular/forms';
+import {SelectionModel} from '@angular/cdk/collections';
 
 @Component({
   selector: 'app-content',
@@ -15,7 +16,8 @@ export class ContentComponent implements OnInit {
   
   dataSource: MatTableDataSource<any>;
   pessoas:any = []
-  displayedColumns = ['id', 'nome', 'login', 'altura', 'peso']; 
+  displayedColumns = ['select', 'id', 'nome', 'login', 'altura', 'peso']
+  selection = new SelectionModel<any>(true, [])
   
   ngOnInit() {
 
@@ -24,6 +26,42 @@ export class ContentComponent implements OnInit {
   constructor(public dialog: MatDialog, public api: ApiService) {
 
   }
+
+  marcarUnico(row){
+    this.selection.toggle(row)
+  }
+
+  renderizaButtonsDeSelecionados(): boolean {
+    if(this.selection.selected[0] !== undefined)
+      return true
+    
+    return false
+  }
+
+  notRenderizaButtonsDeSelecionados(): boolean {
+    return !this.renderizaButtonsDeSelecionados()
+  }
+
+  excluir(){
+    this.api.
+  }
+
+  
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.dataSource.data.length;
+    return numSelected === numRows;
+  }
+
+
+  masterToggle() {
+    
+    this.isAllSelected() ?
+        this.selection.clear() :
+        this.dataSource.data.forEach(row => {this.selection.select(row);});
+  }
+
+
 
   aplicarFiltro(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

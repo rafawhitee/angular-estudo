@@ -11,7 +11,24 @@
             <input matInput (keyup)="aplicarFiltro($event)" placeholder="Digite algo para filtrar...">
         </mat-form-field>
 
-        <mat-table class="pessoas-table mat-elevation-z8" [dataSource]="dataSource" matSort>
+        <mat-table #table class="pessoas-table mat-elevation-z8" [dataSource]="dataSource" matSort>
+
+            <ng-container matColumnDef="select">
+                <mat-header-cell *matHeaderCellDef>
+                  <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                  </mat-checkbox>
+                </mat-header-cell>
+
+                <mat-cell *matCellDef="let row">
+                  <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? marcarUnico(row) : null"
+                                [checked]="selection.isSelected(row)">
+                  </mat-checkbox>
+                </mat-cell>
+
+            </ng-container> 
 
             <ng-container matColumnDef="id">
                 <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
@@ -46,14 +63,28 @@
         
         </mat-table>
 
-        <mat-paginator [pageSizeOptions]="[1, 10, 50]" showFirstLastButtons></mat-paginator>
+        <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons></mat-paginator>
 
 </div>
 
     <div class="card-footer">
        <button class="btn btn-warning" (click)="buscarPessoas()">Buscar Pessoas</button>
        <button class="btn btn-info marginLeft-1-p" (click)="abrirPopupNovaPessoa()">Nova Pessoa</button>
-       <button class="btn btn-success marginLeft-1-p" (click)="buscarPessoas()">Selecionada</button>
+        
+       <!-- ENABLED -->
+       <button class="btn btn-danger marginLeft-1-p" *ngIf="renderizaButtonsDeSelecionados()"
+                (click)="abrirPopupNovaPessoa()">Excluir Selecionada</button>
+
+       <button  class="btn btn-success marginLeft-1-p" *ngIf="renderizaButtonsDeSelecionados()"
+                (click)="abrirPopupNovaPessoa()">Editar Selecionada</button>
+
+
+        <!-- DISABLED -->
+        <button class="btn btn-secondary marginLeft-1-p" *ngIf="notRenderizaButtonsDeSelecionados()" disabled="true"
+                (click)="abrirPopupNovaPessoa()">Excluir Selecionada</button>
+
+       <button  class="btn btn-secondary marginLeft-1-p" *ngIf="notRenderizaButtonsDeSelecionados()" disabled="true"
+                (click)="abrirPopupNovaPessoa()">Editar Selecionada</button>
     </div>
 
 </div>
